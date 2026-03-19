@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Spam Detector</title>
+
+    <!-- iOS Font -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #000000, #0a1f44);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            width: 320px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.3);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            border-radius: 12px;
+            border: none;
+            padding: 10px;
+            outline: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .spam {
+            color: #ff4d4d;
+        }
+
+        .safe {
+            color: #4dff88;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🔐 Spam Detector</h2>
+
+    <textarea id="emailText" placeholder="Enter email message..."></textarea>
+
+    <button onclick="checkSpam()">Check</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function checkSpam() {
+        let email = document.getElementById("emailText").value.toLowerCase();
+
+        let spamKeywords = [
+            "win", "free", "prize", "money", "urgent",
+            "lottery", "offer", "click", "buy now", "hack"
+        ];
+
+        let isSpam = false;
+
+        for (let i = 0; i < spamKeywords.length; i++) {
+            if (email.includes(spamKeywords[i])) {
+                isSpam = true;
+                break;
+            }
+        }
+
+        let resultDiv = document.getElementById("result");
+
+        if (isSpam) {
+            resultDiv.innerHTML = "⚠️ SPAM DETECTED";
+            resultDiv.className = "spam";
+        } else {
+            resultDiv.innerHTML = "✅ SAFE EMAIL";
+            resultDiv.className = "safe";
+        }
+    }
+</script>
+
+</body>
+</html>
